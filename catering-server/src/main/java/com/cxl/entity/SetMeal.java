@@ -2,6 +2,7 @@ package com.cxl.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.cxl.utils.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,9 +19,6 @@ import java.time.LocalDateTime;
 public class SetMeal extends BaseEntity<SetMeal> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private Long id;
-
 
     //分类id
     private Long categoryId;
@@ -67,5 +65,6 @@ public class SetMeal extends BaseEntity<SetMeal> implements Serializable {
 
 
     //是否删除
+    @TableLogic(delval = "1")
     private Integer isDeleted;
 }

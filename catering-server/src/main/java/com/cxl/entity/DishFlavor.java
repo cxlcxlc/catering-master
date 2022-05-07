@@ -1,9 +1,6 @@
 package com.cxl.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import com.cxl.utils.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +19,6 @@ public class DishFlavor extends BaseEntity<DishFlavor> implements Serializable {
 
     //菜品id
     private Long dishId;
-
 
     //口味名称
     private String name;
@@ -47,8 +43,8 @@ public class DishFlavor extends BaseEntity<DishFlavor> implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
 
-
     //是否删除
+    @TableLogic(delval = "1")
     private Integer isDeleted;
 
 }

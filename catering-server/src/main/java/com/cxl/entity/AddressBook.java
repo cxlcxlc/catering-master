@@ -2,6 +2,7 @@ package com.cxl.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cxl.utils.BaseEntity;
 import lombok.Data;
@@ -86,5 +87,6 @@ public class AddressBook extends BaseEntity<AddressBook>{
 
 
     //是否删除
+    @TableLogic(delval = "1")
     private Integer isDeleted;
 }

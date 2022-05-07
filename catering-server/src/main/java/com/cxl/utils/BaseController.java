@@ -31,24 +31,24 @@ public abstract class BaseController<S extends BaseService<T>, T extends BaseEnt
     }
 
     @RequestMapping("/page")
-    public Page<T> listPage(T entity, @RequestParam(name = "page", defaultValue = "1", required = false) int page, @RequestParam(name = "rows", defaultValue = "10", required = false) int rows) {
+    public Page<T> listPage(T entity, @RequestParam(name = "page", defaultValue = "1", required = false) int page, @RequestParam(name = "pageSize", defaultValue = "10", required = false) int rows) {
         return service.listPage(entity, page, rows);
     }
 
 
-    @RequestMapping(value = "/list")
+    @GetMapping
     public List<T> list(T entity) {
         return service.list(entity);
     }
 
     @PutMapping
-    public ResponseBean<T> update(T entity) {
+    public ResponseBean<T> update(@RequestBody T entity) {
         return this.save(entity);
     }
 
 
     @PostMapping
-    public ResponseBean<T> save(T entity) {
+    public ResponseBean<T> save(@RequestBody T entity) {
         ResponseBean<T> rm = new ResponseBean<>();
         try {
             beforeSave(entity); //保存前处理实体类
@@ -62,7 +62,7 @@ public abstract class BaseController<S extends BaseService<T>, T extends BaseEnt
     }
 
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseBean<String> delete(@PathVariable Long id) {
         ResponseBean<String> rm = new ResponseBean<>();
         try {
@@ -76,7 +76,7 @@ public abstract class BaseController<S extends BaseService<T>, T extends BaseEnt
 
 
     @RequestMapping(value = "/delete")
-    public ResponseBean<String> delete(@RequestParam List<Long> ids) {
+    public ResponseBean<String> delete(List<Long> ids) {
         ResponseBean<String> rm = new ResponseBean<>();
         try {
             service.removeByIds(ids);

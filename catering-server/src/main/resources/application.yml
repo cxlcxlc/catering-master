@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9000
   servlet:
     context-path: /
 spring:
@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://182.92.214.212:3306/catering?characterEncoding=UTF-8&timeZone=Asia/Shanghai
     username: root
-    password: root
+    password: invictus295
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

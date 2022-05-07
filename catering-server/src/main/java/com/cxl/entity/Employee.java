@@ -27,6 +27,7 @@ public class Employee extends BaseEntity<Employee> implements Serializable {
 
     private String idNumber;
 
+    //0：正常 1：禁用
     private Integer status;
 
     private LocalDateTime createTime;

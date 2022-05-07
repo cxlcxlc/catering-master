@@ -2,6 +2,7 @@ package com.cxl.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.cxl.utils.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,11 +19,8 @@ public class Category extends BaseEntity<Category> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-
     //类型 1 菜品分类 2 套餐分类
     private Integer type;
-
 
     //分类名称
     private String name;
@@ -52,6 +50,7 @@ public class Category extends BaseEntity<Category> implements Serializable {
 
 
     //是否删除
+    @TableLogic(delval = "1")
     private Integer isDeleted;
 
 }

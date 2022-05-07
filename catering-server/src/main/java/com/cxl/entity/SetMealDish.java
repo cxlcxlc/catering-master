@@ -2,6 +2,7 @@ package com.cxl.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.cxl.utils.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -60,6 +61,7 @@ public class SetMealDish extends BaseEntity<SetMealDish> implements Serializable
     private Long updateUser;
 
 
-    //是否删除
+    //是否删除 0
+    @TableLogic(delval = "1")
     private Integer isDeleted;
 }

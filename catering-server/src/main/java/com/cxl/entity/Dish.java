@@ -1,9 +1,6 @@
 package com.cxl.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import com.cxl.utils.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -70,6 +67,7 @@ public class Dish extends BaseEntity<Dish> implements Serializable {
 
 
     //是否删除
+    @TableLogic(delval = "1")
     private Integer isDeleted;
 
 }
