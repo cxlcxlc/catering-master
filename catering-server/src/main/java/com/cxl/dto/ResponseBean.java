@@ -1,4 +1,4 @@
-package com.cxl.utils;
+package com.cxl.dto;
 
 import lombok.Data;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 @Data
 public class ResponseBean<T> {
 
-    private Integer code; //编码：1成功，0和其它数字为失败
+    private Integer code;
 
     private String msg; //错误信息
 
@@ -17,15 +17,22 @@ public class ResponseBean<T> {
 
     public static <T> ResponseBean<T> success(T object) {
         ResponseBean<T> responseBean = new ResponseBean<T>();
+        responseBean.msg = "操作成功";
         responseBean.data = object;
-        responseBean.code = 1;
+        responseBean.code = 200;
         return responseBean;
     }
 
     public static <T> ResponseBean<T> error(String msg) {
-        ResponseBean responseBean = new ResponseBean();
+        ResponseBean<T> responseBean = new ResponseBean<>();
         responseBean.msg = msg;
-        responseBean.code = 0;
+        responseBean.code = 400;
+        return responseBean;
+    }
+    public static <T> ResponseBean<T> error() {
+        ResponseBean<T> responseBean = new ResponseBean<>();
+        responseBean.msg = "操作失败";
+        responseBean.code = 400;
         return responseBean;
     }
 

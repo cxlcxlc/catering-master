@@ -17,8 +17,6 @@ public class ShoppingCart extends BaseEntity<ShoppingCart> implements Serializab
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
     //名称
     private String name;
 
