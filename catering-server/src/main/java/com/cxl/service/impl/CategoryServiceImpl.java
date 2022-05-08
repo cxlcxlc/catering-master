@@ -17,4 +17,5 @@ public class CategoryServiceImpl extends BaseServiceImpl<CategoryDao, Category> 
     public Page<Category> listPage(Category entity, int pageNum, int pageSize) {
         return  baseMapper.selectPage(new Page<>(pageNum, pageSize), Wrappers.<Category>query().orderByAsc("sort"));
     }
+
 }

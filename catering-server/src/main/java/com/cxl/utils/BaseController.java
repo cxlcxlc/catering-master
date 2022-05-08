@@ -2,14 +2,19 @@ package com.cxl.utils;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cxl.dto.ResponseBean;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@CrossOrigin
+
+@RequiresAuthentication
 public abstract class BaseController<S extends BaseService<T>, T extends BaseEntity<T>> {
 
     @Autowired
@@ -43,8 +48,10 @@ public abstract class BaseController<S extends BaseService<T>, T extends BaseEnt
     }
 
     @PutMapping
-    public ResponseBean<T> update(@RequestBody T entity) {
+    public ResponseBean<T> update(HttpServletRequest request, @RequestBody T entity) {
         if (entity == null || entity.getId() == null) return ResponseBean.error();
+        beforeSave(entity);
+        entity.setUserId(Long.valueOf((String) request.getAttribute("userId")));
         if (service.updateById(entity)) {
             return ResponseBean.success(entity);
         }
@@ -53,8 +60,9 @@ public abstract class BaseController<S extends BaseService<T>, T extends BaseEnt
 
 
     @PostMapping
-    public ResponseBean<T> save(@RequestBody T entity) {
+    public ResponseBean<T> save(HttpServletRequest request, @RequestBody T entity) {
         beforeSave(entity);
+        entity.setUserId(Long.valueOf((String) request.getAttribute("userId")));
         if (service.save(entity)) {
             return ResponseBean.success(entity);
         }
