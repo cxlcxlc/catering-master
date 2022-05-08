@@ -20,9 +20,6 @@ public class SetMealDish extends BaseEntity<SetMealDish> implements Serializable
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
-
-
     //套餐id
     private Long setMealId;
 

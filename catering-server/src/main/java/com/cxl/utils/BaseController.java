@@ -1,7 +1,7 @@
 package com.cxl.utils;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.pagehelper.PageInfo;
+import com.cxl.dto.ResponseBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 public abstract class BaseController<S extends BaseService<T>, T extends BaseEntity<T>> {
 
     @Autowired
@@ -24,67 +25,58 @@ public abstract class BaseController<S extends BaseService<T>, T extends BaseEnt
     }
 
     @GetMapping("/{id}")
-    public T edit(@PathVariable Long id) throws Exception {
+    public ResponseBean<T> edit(@PathVariable Long id) {
         T entity = service.getById(id);
         afterEdit(entity);
-        return entity;
+        return ResponseBean.success(entity);
     }
 
     @RequestMapping("/page")
-    public Page<T> listPage(T entity, @RequestParam(name = "page", defaultValue = "1", required = false) int page, @RequestParam(name = "pageSize", defaultValue = "10", required = false) int rows) {
-        return service.listPage(entity, page, rows);
+    public ResponseBean<Page<T>> listPage(@RequestBody(required = false) T entity, @RequestParam(name = "page", defaultValue = "1", required = false) int page, @RequestParam(name = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        return ResponseBean.success(service.listPage(entity, page, pageSize));
     }
 
 
     @GetMapping
-    public List<T> list(T entity) {
-        return service.list(entity);
+    public ResponseBean<List<T>> list(T entity) {
+        return ResponseBean.success(service.list(entity));
     }
 
     @PutMapping
     public ResponseBean<T> update(@RequestBody T entity) {
-        return this.save(entity);
+        if (entity == null || entity.getId() == null) return ResponseBean.error();
+        if (service.updateById(entity)) {
+            return ResponseBean.success(entity);
+        }
+        return ResponseBean.error();
     }
 
 
     @PostMapping
     public ResponseBean<T> save(@RequestBody T entity) {
-        ResponseBean<T> rm = new ResponseBean<>();
-        try {
-            beforeSave(entity); //保存前处理实体类
-            service.saveOrUpdate(entity);
-            rm.setData(entity);
-        } catch (Exception e) {
-            e.printStackTrace();
-            rm.setMsg("保存失败");
+        beforeSave(entity);
+        if (service.save(entity)) {
+            return ResponseBean.success(entity);
         }
-        return rm;
+        return ResponseBean.error();
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseBean<String> delete(@PathVariable Long id) {
-        ResponseBean<String> rm = new ResponseBean<>();
-        try {
-            service.removeById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            rm.setMsg("保存失败");
+        if (!service.removeById(id)) {
+            ResponseBean.error();
         }
-        return rm;
+        return ResponseBean.success(null);
     }
 
 
     @RequestMapping(value = "/delete")
-    public ResponseBean<String> delete(List<Long> ids) {
-        ResponseBean<String> rm = new ResponseBean<>();
-        try {
-            service.removeByIds(ids);
-        } catch (Exception e) {
-            e.printStackTrace();
-            rm.setMsg("删除失败");
+    public ResponseBean<String> delete(@RequestBody List<Long> ids) {
+        if (!service.removeByIds(ids)) {
+            ResponseBean.error();
         }
-        return rm;
+        return ResponseBean.success(null);
     }
 
 
