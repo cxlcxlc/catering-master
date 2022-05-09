@@ -23,6 +23,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     protected Long id;
 
     @TableField(exist = false)
-    protected Long userId = 1L;
+    protected Long userId;
 }
 

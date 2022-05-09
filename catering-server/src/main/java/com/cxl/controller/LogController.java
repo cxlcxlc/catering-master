@@ -20,6 +20,7 @@ public class LogController {
         if (employee == null || employee.getUsername() == null) return ResponseBean.error();
         return ResponseBean.success(employeeService.login(employee.getUsername(), employee.getPassword()));
     }
+
     @GetMapping("/employee/logout")
     public ResponseBean<String> logout() {
         SecurityUtils.getSubject().logout();
