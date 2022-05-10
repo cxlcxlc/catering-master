@@ -1,8 +1,10 @@
 import cn.hutool.crypto.SecureUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println(SecureUtil.md5("admin"));
     }
 }

@@ -2,8 +2,11 @@ package com.cxl.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.cxl.utils.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -23,6 +26,7 @@ public class Dish extends BaseEntity<Dish> implements Serializable {
 
 
     //菜品分类id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
 
 
@@ -49,6 +53,8 @@ public class Dish extends BaseEntity<Dish> implements Serializable {
     //顺序
     private Integer sort;
 
+    @TableField(exist = false)
+    private Category category;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
@@ -59,10 +65,12 @@ public class Dish extends BaseEntity<Dish> implements Serializable {
 
 
     @TableField(fill = FieldFill.INSERT)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long createUser;
 
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long updateUser;
 
 

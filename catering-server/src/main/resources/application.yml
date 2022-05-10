@@ -4,7 +4,7 @@ server:
     context-path: /
 spring:
   jackson:
-    date-format: yyyy年MM月dd日 HH:mm E
+    date-format: yyyy年MM月dd日 HH:mm
     time-zone: GMT+8
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -24,3 +24,13 @@ mybatis-plus:
     db-config:
       id-type: ASSIGN_ID
 
+fdfs:
+  # 链接超时
+  connect-timeout: 300
+  # 读取时间
+  so-timeout: 300
+  # 生成缩略图参数
+  thumb-image:
+    width: 150
+    height: 150
+  tracker-list: 182.92.214.212:22122

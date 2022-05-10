@@ -1,6 +1,8 @@
 package com.cxl.entity;
 
 import com.cxl.utils.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,14 +22,17 @@ public class OrderDetail extends BaseEntity<OrderDetail> implements Serializable
     private String name;
 
     //订单id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderId;
 
 
     //菜品id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long dishId;
 
 
     //套餐id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long setMealId;
 
 

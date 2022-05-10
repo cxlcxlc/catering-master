@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.cxl.utils.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,10 +23,12 @@ public class SetMealDish extends BaseEntity<SetMealDish> implements Serializable
     private static final long serialVersionUID = 1L;
 
     //套餐id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long setMealId;
 
 
     //菜品id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long dishId;
 
 

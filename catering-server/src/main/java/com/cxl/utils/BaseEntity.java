@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Data
 public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements Serializable {
 
+
     /**
      * 实体编号（唯一标识）
      */

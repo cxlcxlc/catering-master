@@ -1,6 +1,8 @@
 package com.cxl.entity;
 
 import com.cxl.utils.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,15 +20,18 @@ public class Orders extends BaseEntity<Orders> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //订单号
+    @JsonSerialize(using = ToStringSerializer.class)
     private String number;
 
     //订单状态 1待付款，2待派送，3已派送，4已完成，5已取消
     private Integer status;
 
     //下单用户id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
 
     //地址id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long addressBookId;
 
 

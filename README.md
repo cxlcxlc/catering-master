@@ -12,3 +12,8 @@
 ####  *** 浏览包含菜品浏览、套餐浏览功能；
 ####  *** 购物车包含添加购物车、清空购物车功能；
 
+com.cxl.dao.DishFlavorDao.insert (batch index #1) failed. 
+Cause: java.sql.BatchUpdateException: 
+Duplicate entry '1397849739297861633' for key 'dish_flavor.PRIMARY' ; 
+Duplicate entry '1397849739297861633' for key 'dish_flavor.PRIMARY'; 
+nested exception is java.sql.BatchUpdateException: Duplicate entry '1397849739297861633' for key 'dish_flavor.PRIMARY'

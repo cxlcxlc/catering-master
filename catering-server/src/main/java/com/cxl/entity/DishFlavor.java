@@ -2,6 +2,8 @@ package com.cxl.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.cxl.utils.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,6 +20,7 @@ public class DishFlavor extends BaseEntity<DishFlavor> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //菜品id
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long dishId;
 
     //口味名称
@@ -37,10 +40,11 @@ public class DishFlavor extends BaseEntity<DishFlavor> implements Serializable {
 
 
     @TableField(fill = FieldFill.INSERT)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long createUser;
 
-
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long updateUser;
 
     //是否删除
